@@ -1,3 +1,4 @@
+const { platform } = require('process');
 const electron = require('electron');
 
 const { app, BrowserWindow, Menu } = electron;
@@ -11,8 +12,34 @@ app.on('ready', () => {
     Menu.setApplicationMenu(mainMenu);
 })
 
+let addWindow;
+createAddWindow = () => {
+    addWindow = new BrowserWindow;
+    addWindow.loadURL('https://mhall.xyz');
+}
+
 const menuTemplate = [
     {
-        label: 'File'
+        label: 'File',
+        submenu: [
+            {
+                label: 'Add Todo',
+                click() {
+                    createAddWindow();
+                }
+            },
+            {
+                label: 'Refresh'
+            },
+            {
+                label: 'Quit',
+                accelerator: platform === 'darwin' ? 'Command+Q' : 'Ctrl+Q',
+                click() {
+                    app.quit();
+                }
+            }
+        ]
     }
 ];
+
+platform === 'darwin' ? menuTemplate.unshift({}) : null;
