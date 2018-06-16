@@ -14,5 +14,12 @@
             li.appendChild(text);
             document.querySelector('ul').appendChild(li);
         });
+
+        ipcRenderer.on('todo:clear', () => {
+            var myNode = document.querySelector('ul');
+            while (myNode.firstChild) {
+                myNode.removeChild(myNode.firstChild);
+            }
+        })
     </script>
 </body>
