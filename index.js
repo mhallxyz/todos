@@ -14,7 +14,7 @@ app.on('ready', () => {
 
 let addWindow;
 createAddWindow = () => {
-    addWindow = new BrowserWindow;
+    addWindow = new BrowserWindow({height: 400, width: 600});
     addWindow.loadURL('https://mhall.xyz');
 }
 
